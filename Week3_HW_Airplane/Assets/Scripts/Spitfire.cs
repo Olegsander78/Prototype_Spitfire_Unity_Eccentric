@@ -6,6 +6,7 @@ public class Spitfire : MonoBehaviour
 {    
     public Score Score;
     public Health HealthScore;
+    public GeneratorCoin GeneratorCoin;
     private void OnTriggerEnter(Collider other)
     {
         Bomb bomb = other.gameObject.GetComponent<Bomb>();
@@ -29,7 +30,7 @@ public class Spitfire : MonoBehaviour
         Coin coin = other.gameObject.GetComponent<Coin>();
         if (coin)
         {
-            coin.PickUpCoin();
+            GeneratorCoin.CollectCoin(coin);
             Score.AddOne();
         }
     }

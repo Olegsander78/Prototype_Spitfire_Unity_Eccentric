@@ -19,7 +19,7 @@ public class GenBombs : MonoBehaviour
     
     void DropBomb()
     {
-        GameObject newBomb = Instantiate(BombPrefab, transform.position, Quaternion.identity, transform);
+        GameObject newBomb = Instantiate(BombPrefab, transform.position, Quaternion.identity);
         LunchBomb.Play();
         Invoke(nameof(DropBomb), SecBetweenBomb);
     }

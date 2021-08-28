@@ -13,8 +13,8 @@ public class GenRockets : MonoBehaviour
     void Start()
     {        
         Invoke(nameof(DropRocket), 10f);
+        Invoke(nameof(DropRocket), 10.5f);
         Invoke(nameof(DropRocket), 11f);
-        Invoke(nameof(DropRocket), 12f);
     }
 
     // Update is called once per frame
@@ -25,7 +25,7 @@ public class GenRockets : MonoBehaviour
    
     void DropRocket()
     {
-        GameObject newRocket = Instantiate(RocketPrefab, transform.position, Quaternion.identity, transform);
+        GameObject newRocket = Instantiate(RocketPrefab, transform.position, Quaternion.identity);
         LunchRocket.Play();
         Invoke(nameof(DropRocket), SecBetweenRocket);
     }

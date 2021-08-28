@@ -7,11 +7,10 @@ public class Rocket : MonoBehaviour
     [SerializeField]
     private Transform _target;
     public GameObject DieEffectPrefab;
-    public GameObject SoundExpRocket;    
-    public float SpeedRateRocket=0.15f;
+    public GameObject SoundExpRocket;
+    public float SpeedRateRocket = 0.15f;
     private float _timer;
-    public float TimeLiveRocket=20f;
-    //public AudioSource Bang;
+    public float TimeLiveRocket = 30f;
 
     private void Start()
     {
@@ -28,12 +27,12 @@ public class Rocket : MonoBehaviour
         }
         
         //Вращение ракеты вокруг своей оси
-        transform.Rotate(0f, 1f, 0f);
+        //transform.Rotate(0f, 0f, 1f);
 
         //Преследование ракетой игрока
         Vector3 toTarget = _target.position - transform.position;
-        Vector3 toTargetXZ = new Vector3(toTarget.x, 0f, toTarget.z);
-        transform.rotation = Quaternion.LookRotation(toTargetXZ);
+        //Vector3 toTargetXZ = new Vector3(toTarget.x, 0f, toTarget.z);
+        transform.rotation = Quaternion.LookRotation(toTarget);
 
         transform.position = Vector3.MoveTowards(transform.position, _target.position, Time.deltaTime * SpeedRateRocket);        
     }

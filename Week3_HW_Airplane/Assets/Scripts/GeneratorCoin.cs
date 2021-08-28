@@ -14,8 +14,7 @@ public class GeneratorCoin : MonoBehaviour
     void Start()
     {
         AudioCoinPickUp = GetComponent<AudioSource>();
-        GenCoins(NumberCoins);
-        //UpdateText();
+        GenCoins(NumberCoins);        
     }
 
     // Update is called once per frame
@@ -39,11 +38,7 @@ public class GeneratorCoin : MonoBehaviour
         CoinsList.Remove(coin);
         AudioCoinPickUp.Play();
         Destroy(coin.gameObject);
-        //UpdateText();
     }
 
-    //void UpdateText()
-    //{
-    //    Score.text = "Собрано " + (NumberCoins - CoinsList.Count).ToString() + " монет из " + NumberCoins.ToString();
-    //}
+   
 }

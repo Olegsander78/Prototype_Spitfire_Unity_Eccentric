@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void OnTriggerEnter(Collider other)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Bomb bomb = other.gameObject.GetComponent<Bomb>();
+        if (bomb)
+        {
+            Destroy(gameObject);
+            bomb.ExpBombBullet();
+        }
+        Rocket rocket = other.gameObject.GetComponent<Rocket>();
+        if (rocket)
+        {
+            Destroy(gameObject);
+            rocket.ExpRocket();
+        }
     }
 }

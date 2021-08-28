@@ -6,12 +6,13 @@ public class GenBombs : MonoBehaviour
 {
     [Header("Set in Inspector")]    
     public GameObject BombPrefab;    
-    public float SecBetweenBomb;    
+    public float SecBetweenBomb;
+    public AudioSource LunchBomb;
 
     // Start is called before the first frame update
     void Start()
     {
-        Invoke(nameof(DropBomb), 3f);        
+        Invoke(nameof(DropBomb), 4f);        
     }
 
     // Update is called once per frame
@@ -19,6 +20,7 @@ public class GenBombs : MonoBehaviour
     void DropBomb()
     {
         GameObject newBomb = Instantiate(BombPrefab, transform.position, Quaternion.identity, transform);
+        LunchBomb.Play();
         Invoke(nameof(DropBomb), SecBetweenBomb);
     }
 }

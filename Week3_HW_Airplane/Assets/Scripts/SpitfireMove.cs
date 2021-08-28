@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SpitfireMove : MonoBehaviour
 {
+    [Header("Set in Inspector")]
     public Rigidbody RB;
     public float ConstForceValue = 0.2f;
     public float ForceValue = 10f;

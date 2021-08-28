@@ -3,27 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Spitfire : MonoBehaviour
-{
-    public int HealthSpitfire;
+{    
+    public Score Score;
+    public Health HealthScore;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.GetComponent<Bomb>())
-        {
-            HealthSpitfire -= 1;
-            if (HealthSpitfire <= 0)
+        Bomb bomb = other.gameObject.GetComponent<Bomb>();
+        if (bomb)
+        {            
+            if (HealthScore.RemoveOneHealth() <= 0)
             {
                 Destroy(gameObject);
             }
-            other.gameObject.GetComponent<Bomb>().ExpBomb();
+            bomb.ExpBomb();
         }
-        if (other.gameObject.GetComponent<Rocket>())
-        {
-            HealthSpitfire -= 1;
-            if (HealthSpitfire <= 0)
+        Rocket rocket = other.gameObject.GetComponent<Rocket>();
+        if (rocket)
+        {            
+            if (HealthScore.RemoveOneHealth() <= 0)
             {
                 Destroy(gameObject);
             }
-            other.gameObject.GetComponent<Rocket>().ExpRocket();
+            rocket.ExpRocket();
+        }
+        Coin coin = other.gameObject.GetComponent<Coin>();
+        if (coin)
+        {
+            coin.PickUpCoin();
+            Score.AddOne();
         }
     }
 }

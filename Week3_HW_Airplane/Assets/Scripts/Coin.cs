@@ -9,4 +9,8 @@ public class Coin : MonoBehaviour
     {
         transform.Rotate(0f, 0f, 1f);
     }
+    public void PickUpCoin()
+    {
+        Destroy(gameObject);
+    }
 }

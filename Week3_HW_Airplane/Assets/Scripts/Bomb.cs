@@ -6,7 +6,9 @@ public class Bomb : MonoBehaviour
 {
 
     public GameObject DieEffectPrefab;
-    public AudioSource Bang;
+    public GameObject DieEffectBulletPrefab;
+    
+    public GameObject SoundExpBomb;
     
     // Update is called once per frame
     void Update()
@@ -17,8 +19,14 @@ public class Bomb : MonoBehaviour
 
     public void ExpBomb()
     {
-        Instantiate(DieEffectPrefab, transform.position, Quaternion.identity);
-        Bang.Play();
+        Destroy(Instantiate(SoundExpBomb), 2f);
+        Instantiate(DieEffectPrefab, transform.position, Quaternion.identity);        
+        Destroy(gameObject);
+    }
+    public void ExpBombBullet()
+    {
+        Destroy(Instantiate(SoundExpBomb), 2f);
+        Instantiate(DieEffectBulletPrefab, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 }

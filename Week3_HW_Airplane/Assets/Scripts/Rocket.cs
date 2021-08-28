@@ -4,18 +4,44 @@ using UnityEngine;
 
 public class Rocket : MonoBehaviour
 {
+    [SerializeField]
+    private Transform _target;
     public GameObject DieEffectPrefab;
-    public AudioSource Bang;
+    public GameObject SoundExpRocket;    
+    public float SpeedRateRocket=0.15f;
+    private float _timer;
+    public float TimeLiveRocket=20f;
+    //public AudioSource Bang;
+
+    private void Start()
+    {
+        _target = FindObjectOfType<Spitfire>().gameObject.transform;
+    }
+
     void Update()
     {
+        _timer += Time.deltaTime;
+        if (_timer > TimeLiveRocket)
+        {
+            _timer = 0f;
+            ExpRocket();
+        }
+        
+        //Вращение ракеты вокруг своей оси
         transform.Rotate(0f, 1f, 0f);
-        //transform.position -= transform.position + Vector3.up;
+
+        //Преследование ракетой игрока
+        Vector3 toTarget = _target.position - transform.position;
+        Vector3 toTargetXZ = new Vector3(toTarget.x, 0f, toTarget.z);
+        transform.rotation = Quaternion.LookRotation(toTargetXZ);
+
+        transform.position = Vector3.MoveTowards(transform.position, _target.position, Time.deltaTime * SpeedRateRocket);        
     }
 
     public void ExpRocket()
     {
-        Instantiate(DieEffectPrefab, transform.position, Quaternion.identity);
-        Bang.Play();
+        Destroy(Instantiate(SoundExpRocket), 2f);
+        Instantiate(DieEffectPrefab, transform.position, Quaternion.identity);        
         Destroy(gameObject);
     }
 }
